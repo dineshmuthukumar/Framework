@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Controllers\Controller;
-
+//composer require josantonius/request;
+use App\Http\Requests;
 class NewForm extends Controller
 {
     /**
@@ -23,7 +24,7 @@ class NewForm extends Controller
 
     //foreach ($request as $key => $value) {
         # code...
-    //}
+    //s}
     $Firstname=request()->Firstname;
     $Lastname=request()->Lastname;
     $gender=request()->gender;
@@ -35,7 +36,7 @@ class NewForm extends Controller
     $zipcode=request()->zipcode;
     $Email_id=request()->emailid;
     $mobileno=request()->mobileno;
- echo $Firstname;
+ //echo $Firstname;
  //$input::all();
    // dd($req->all());
     

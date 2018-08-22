@@ -20,5 +20,8 @@ Route::post('dinesh/{id}', 'HelloWorldController@Index');
 
 
 Route::get('Form','NewForm@Index');
-Route::Post('Formnew','NewForm@Formadd');
+Route::post('Formnew','NewForm@Formadd');
 
+
+Route::get('New','BearDetails@View');
+Route::post('Bear','BearDetails@Insert');
