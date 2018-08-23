@@ -2,6 +2,7 @@
 
 namespace App\models;
 
+
 use Illuminate\Database\Eloquent\Model;
 
 class fish extends Model
@@ -14,6 +15,6 @@ class fish extends Model
 
     // DEFINE RELATIONSHIPS --------------------------------------------------
     public function bear() {
-        return $this->belongsTo('Bear');
+        return $this->belongsTo('Bears');
     }
 }
