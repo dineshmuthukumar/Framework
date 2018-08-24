@@ -31,4 +31,12 @@ Route::get('fish','BearDetails@fish');
 Route::get('Student','studentdetails@show');
 Route::post('studentForm','studentdetails@details');
 Route::get('List','studentdetails@list');
+Route::get('update/{id}','studentdetails@select');
+Route::post('student','studentdetails@update');
+Route::get('delete/{id}','studentdetails@delete');
+
+Route::get('mark/{id}','studentdetails@get');
+Route::post('markinsert','studentdetails@markinsert');
+Route::post('markupdate','studentdetails@markupdate');
+
 
