@@ -1,4 +1,15 @@
-<form action="{{url('Formnew')}}" method="post">
+
+
+@if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+        @endif
+<form action="{{url('Checkdata')}}" method="post">
 {{csrf_field()}}
 <center>
  <table>
@@ -12,7 +23,7 @@
 <tr><td> Born Dater: </td> <td> <input type="date" name="borndate" max=2 Placeholder="03-01-1996"  /> </td></tr>
  <tr> <td> Address: </td> <td> <textarea rows="4" cols="50" name="Address" ></textarea></td> </tr>
  <tr> <td>City: </td><td> <select name="City" />
- <option value="0"> please select option</option>
+ <option value=" "> please select option</option>
  <option value="chennai" >Chennai</option>
  <option value="madurai" >Madurai</option>
  <option value="Trichy">Trichy</option>
@@ -25,6 +36,8 @@
 	<tr><td> zip_code: </td> <td><input type="numeric"  name="zipcode" placeholder="Enter the zipcode..."  > </td></tr>
 	<tr><td> Email_id:</td><td> <input type="Email"    name="emailid" placeholder="Enter the Your Email_id...." > </td></tr>
     <tr><td> Mobile_number:</td><td><input type="number" name="mobileno"  placeholder="Enter Mobile Number..."> </td></tr>
+    <tr><td> Password:</td><td><input type="Password" name="Password"  placeholder="Enter Password..."> </td></tr>
+    <tr><td> Confirm_password:</td><td><input type="Password" name="Confirm_password"  placeholder="Enter Confirm_password..."> </td></tr>
 	<tr><td>  <input type="submit" name="submit" value="submit"> </td>
     <td> <input type="reset" name="reset" value="reset"> </td></tr> 
           </form>

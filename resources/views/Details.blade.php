@@ -1,3 +1,4 @@
+
 <form action="{{url('markupdate')}}" method="post">
 {{csrf_field()}}
 <fieldset>
@@ -14,6 +15,6 @@
        </center>
    </table>
 </fieldset>
-
+<p><a href='{{ url("/List") }}'>Cancel</a></p>
 
 

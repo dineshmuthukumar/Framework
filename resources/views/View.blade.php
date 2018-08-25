@@ -1,3 +1,13 @@
+
+@if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+        @endif
 <form action="{{url('studentForm')}}" method="post">
 {{csrf_field()}}
 <fieldset>
@@ -11,4 +21,6 @@
       <tr><td><input type="submit" name="submit" value="submit"></td></tr>
       </center>
   </table>
+
 </fieldset>
+<p><a href='{{ url("/List") }}'>Cancel</a></p>
