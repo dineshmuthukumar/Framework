@@ -27,23 +27,21 @@ class StoreBlogPost extends FormRequest
 'Firstname'=> 'required|max:25',
 'Lastname'=>'required|max:25',
 'gender'=>'filled|required',
-'borndate'=>'date_format:"d-m-Y"|required',
+'borndate'=>'date_format:"format"|required',
 'Address'=>'required|max:30',
 'City'=>'required',
 'State'=>'nullable',
 'country'=>'required|min:6',
 'emailid'=>'required|email',
 'mobileno'=>'Integer|min:10',
-'password'=>'required|min:8',
-'Confirm_password'=>'required_with:password|same:password|min:8'
-            //
-        ];
+'Password'=>'required|min:8',
+'Confirm_Password'=>'required_with:password|same:Password|min:8'];
     }
 public function messages()
 {
     return [
-        'Student_name.required' => 'A name is required',
-        'emailid.required'  => 'A Email is required',
+        'mobileno.required' => 'A mobile_Number is required',
+        'emailid.required'  => 'A Email_id is required',
     ];
 }
 }

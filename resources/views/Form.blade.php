@@ -9,7 +9,7 @@
               </ul>
           </div>
         @endif
-<form action="{{url('Checkdata')}}" method="post">
+<form action="{{url('Check')}}" method="post">
 {{csrf_field()}}
 <center>
  <table>
@@ -37,7 +37,7 @@
 	<tr><td> Email_id:</td><td> <input type="Email"    name="emailid" placeholder="Enter the Your Email_id...." > </td></tr>
     <tr><td> Mobile_number:</td><td><input type="number" name="mobileno"  placeholder="Enter Mobile Number..."> </td></tr>
     <tr><td> Password:</td><td><input type="Password" name="Password"  placeholder="Enter Password..."> </td></tr>
-    <tr><td> Confirm_password:</td><td><input type="Password" name="Confirm_password"  placeholder="Enter Confirm_password..."> </td></tr>
+    <tr><td> Confirm_password:</td><td><input type="Password" name="Confirm_Password"  placeholder="Enter Confirm_password..."> </td></tr>
 	<tr><td>  <input type="submit" name="submit" value="submit"> </td>
     <td> <input type="reset" name="reset" value="reset"> </td></tr> 
           </form>

@@ -5,9 +5,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreBlogPost;
 use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Validation\Validator;
+use Validator;
+use Illuminate\Support\MessageBag;
 use DB;
-
+use Session;
 class studentdetails extends Controller
 {
 
@@ -15,10 +16,43 @@ class studentdetails extends Controller
 	{
 		return view('View');
 	}
-    public function details()
+    public function details(Request $request)
     {
+   //session()->flush();;
+    //die;	
+ //$request->session()->flash('status', 'Task was successful!');
+  //$request->session()->flash('username', 'Dinesh');
+   //$request->session()->flash('email', 'Dinesh@kenhike.com');
+   //$request->session()->reflash(); 	
+   //session(['username'=>'Dinesh','email'=>'Dinesh@kenhike.com']);
+   
+   //$request->session()->keep(['username', 'email']);
+
+   echo session('status')."<br />";
+   echo session('username')."<br/>";
+   echo session('email');
+     //$request->session()->reflash();
+
+  /*  // $Student_name=request()->Student_name;
+    //Session()->put('Student_Name',$Student_name);
+     //Session()->get('Student_Name');
+   //echo session()->pull('Student_name');
+
+session()->put('Student_Name',request()->Student_name);
+session()->put('Email_id',request()->Email_id);
+    echo  session()->get('Student_Name');
+    echo  session()->get('Email_id');
+     //echo session()->pull('Student_Name');
+   //. 
+   echo session()->keep([]);
+    //session()->flash();
+     
+     
+
+    	//$data = $request->session()->all();
+    	//print_r($data);
+/*
     	
-    	echo $Student_name=request()->Student_name;
     	echo $Email_id=request()->Email_id;
     	echo $City=request()->City;
     	echo $State=request()->State;
@@ -29,13 +63,42 @@ class studentdetails extends Controller
     }
 DB::table('student')->insert(
     ['Student_name' => $Student_name,'Email_id'=>$Email_id,'City'=>$City,'State'=>$State]);
-    return redirect('List'); 
+ 
+   return redirect('List');*/ 
 }
 public function check(StoreBlogPost $request)
 {
-	$validated = $request->validated();
+	$validated = $request->validate();
+
 
     	dd($validatedData);
+}
+public function store (request $request)
+{
+	$validator = Validator::make($request->all(), [
+ 'Firstname'=> 'required|max:25',
+'Lastname'=>'required|max:25',
+'gender'=>'filled|required',
+'borndate'=>'date_format:"dd-mm-yyyy"|required',
+'Address'=>'required|max:30',
+'City'=>'required',
+'State'=>'nullable',
+'country'=>'required|min:6',
+'emailid'=>'required|email',
+'mobileno'=>'Integer|min:10',
+'Password'=>'required|min:8',
+'Confirm_Password'=>'required_with:password|same:Password|min:8']);
+	$validator->after(function ($validator) {
+    if ($this->somethingElseIsInvalid()) {
+        $validator->errors()->add('field', 'Something is wrong with this field!');
+    }
+});
+	if ($validator->fails()) {
+            return redirect('Form')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
 }
 public function list()
 {
