@@ -41,4 +41,8 @@ Route::post('Check','studentdetails@store');
 
 Route::get('Session','UserController@showProfile');
 
+Route::get('NewsHome','UserController@View');
+Route::get('News','UserController@newview');
+Route::get('admin','UserController@admin');
+
 

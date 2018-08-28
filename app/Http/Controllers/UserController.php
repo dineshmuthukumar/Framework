@@ -22,4 +22,15 @@ print_r($value);
 
         //
     }
+
+public function View()
+{
+    return View('Newsfeed');
+}
+public function admin()
+{
+    return View('Admin');
+}
+
+
 }
