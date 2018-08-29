@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserTable extends Migration
+class CreatePostTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('User_Details', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('Email_id');
+        Schema::create('Post_Details', function (Blueprint $table) {
+            $table->increments('Post_id');
+            $table->string('Post_Title');
+            $table->string('Post_Body');
+            $table->Integer('Category_id');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('User_Details');
+        Schema::dropIfExists('Post_Details');
     }
 }

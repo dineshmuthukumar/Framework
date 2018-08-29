@@ -42,7 +42,13 @@ Route::post('Check','studentdetails@store');
 Route::get('Session','UserController@showProfile');
 
 Route::get('NewsHome','UserController@View');
-Route::get('News','UserController@newview');
 Route::get('admin','UserController@admin');
+Route::get('Register','UserController@Register');
+Route::post('User_register','UserController@Validation');
+Route::get('login','UserController@Login');
+Route::post('User_Login','UserController@Logining');
+Route::get('Forget_Password','UserController@Forget_password');
+Route::post('new_password','UserController@New_password');
 
 
+Route::post('send', 'UserController@send');

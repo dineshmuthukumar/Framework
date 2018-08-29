@@ -2,22 +2,7 @@
 <html>
 <head>
 <title>NewsFeed</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="{{url('assets/css/bootstrap.min.css')}}">
-<link rel="stylesheet" type="text/css" href="{{url('assets/css/font-awesome.min.css')}}">
-<link rel="stylesheet" type="text/css" href="{{url('assets/css/animate.css')}}">
-<link rel="stylesheet" type="text/css" href="{{url('assets/css/font.css')}}">
-<link rel="stylesheet" type="text/css" href="{{url('assets/css/li-scroller.css')}}">
-<link rel="stylesheet" type="text/css" href="{{url('assets/css/slick.css')}}">
-<link rel="stylesheet" type="text/css" href="{{url('assets/css/jquery.fancybox.css')}}">
-<link rel="stylesheet" type="text/css" href="{{url('assets/css/theme.css')}}">
-<link rel="stylesheet" type="text/css" href="{{url('assets/css/style.css')}}">
-<!--[if lt IE 9]>
-<script src="assets/js/html5shiv.min.js"></script>
-<script src="assets/js/respond.min.js"></script>
-<![endif]-->
+@include('News.Frontend.header')
 </head>
 <body>
 <div id="preloader">
@@ -33,11 +18,13 @@
             <ul class="top_nav">
               <li><a href="index.html">Home</a></li>
               <li><a href="#">About</a></li>
+              <li><a href="{{url('Register')}}">Register</a></li>
+              <li><a href="{{url('login')}}">Login</a></li>
               <li><a href="pages/contact.html">Contact</a></li>
             </ul>
           </div>
           <div class="header_top_right">
-            <p>Friday, December 05, 2045</p>
+            <p>Friday, Augest 29, 2018</p>
           </div>
         </div>
       </div>
@@ -464,52 +451,9 @@
     </div>
   </section>
   <footer id="footer">
-    <div class="footer_top">
-      <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="footer_widget wow fadeInLeftBig">
-            <h2>Flickr Images</h2>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="footer_widget wow fadeInDown">
-            <h2>Tag</h2>
-            <ul class="tag_nav">
-              <li><a href="#">Games</a></li>
-              <li><a href="#">Sports</a></li>
-              <li><a href="#">Fashion</a></li>
-              <li><a href="#">Business</a></li>
-              <li><a href="#">Life &amp; Style</a></li>
-              <li><a href="#">Technology</a></li>
-              <li><a href="#">Photo</a></li>
-              <li><a href="#">Slider</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="footer_widget wow fadeInRightBig">
-            <h2>Contact</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            <address>
-            Perfect News,1238 S . 123 St.Suite 25 Town City 3333,USA Phone: 123-326-789 Fax: 123-546-567
-            </address>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer_bottom">
-      <p class="copyright">Copyright &copy; 2045 <a href="index.html">NewsFeed</a></p>
-      <p class="developer">Developed By Wpfreeware</p>
-    </div>
+   @include('News.Frontend.footer')
   </footer>
 </div>
-<script src="{{url('assets/js/jquery.min.js')}}"></script> 
-<script src="{{url('assets/js/wow.min.js')}}"></script> 
-<script src="{{url('assets/js/bootstrap.min.js')}}"></script> 
-<script src="{{url('assets/js/slick.min.js')}}"></script> 
-<script src="{{url('assets/js/jquery.li-scroller.1.0.js')}}"></script> 
-<script src="{{url('assets/js/jquery.newsTicker.min.js')}}"></script> 
-<script src="{{url('assets/js/jquery.fancybox.pack.js')}}"></script> 
-<script src="{{url('assets/js/custom.js')}}"></script>
+@include('News.Frontend.Script')
 </body>
 </html>
