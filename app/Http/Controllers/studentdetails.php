@@ -110,7 +110,7 @@ public function list()
 }
   public function select($id)
 {
-	$table= DB::table('User_de')->select('id','Student_name','Email_id','Password')->where("Email_id", "=",$Email_id)->where("Password", "=",$Password)->first();
+	$table= DB::table('student')->select('id','Student_name','Email_id','City','State')->where('id', $id)->first();
 
 	//dd($table);
 	//dd($table);

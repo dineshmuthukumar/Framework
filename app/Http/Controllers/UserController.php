@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Session;
 use Validator;
 use DB;
-use mail;
+use Mail;
 
 
 class UserController extends Controller
@@ -64,8 +64,7 @@ public function Logining()
     $Login=DB::table('User_Details')->select('name','email_id','password')->where('email_id','=',$Email_id)->where("password", "=", md5($password))->first();
     if(!$Login)
     {
-        return view('News/Login');
-        echo "Emailid and Password incorrect";
+        return redirect('login')->with('success','Email_id and password incorrect!');
     }
     return View('News/Admin');
 
@@ -77,18 +76,65 @@ public function Forget_password()
 
 public function New_password()
 {
-    $Email_id=request()->Forget_Emailid;
-    $expire_stamp = date('Y-m-d h:i:s', strtotime("+10 min"));
-DB::table('User_Details')->where('email_id','=',$Email_id)->update(['resetpassword_token'=>uniqid(),'resetpassword_created_at'=>$expire_stamp]);
+    
+ $Email_id=request()->Forget_Emailid;
+
+$expire_stamp = date('Y-m-d h:i:s', strtotime("+10 min"));
+
+$Email=DB::table('User_Details')->where('email_id','=',$Email_id)->update(['resetpassword_token'=>uniqid(),'resetpassword_created_at'=>$expire_stamp]);
+if(!empty($Email))
+{
 $resetpassword_token=DB::table('User_Details')->where('email_id','=',$Email_id)->select('resetpassword_token')->first();
-   $data['results']=$resetpassword_token;
-    Mail::send('News.mail',function ($message) {
-            $message->from('dineshmuthukumae.g@kenhike.com', 'Your request mail');
+   
+   $data['resetpassword_token']=$resetpassword_token;
+    
+    Mail::send('News.mail',['resetpassword_token' => $resetpassword_token],function ($message) {
+       
+        $Email_id=request()->Forget_Emailid;
+            
+            $message->from('dineshmuthukumar@yopmail.net');
 
-            $message->to('dineshmuthukumar448@gmail.com')->subject('Your Reminder!');
-                                                                        });
+            $message->to($Email_id)->subject('Forget Password Notification');                                                       
+             
+              });
+    return redirect('login');
+  }
+  return redirect('login')->with('success','invaild emailid Please go to the Register page!');
+}
+public function Change_password($resetpassword_token)
+{
+   
+    $current_date=date('Y-m-d h:i:s');
+    $database_token=DB::table('User_Details')->where('resetpassword_token','=',$resetpassword_token)->select('resetpassword_token')->first();
 
+ if(!empty($database_token))
+{
+     $resetpassword_token=DB::table('User_Details')->where('resetpassword_token','=',$resetpassword_token)->select('resetpassword_created_at','resetpassword_token')->first();
 
-    return view('News/Mail',$data);
+      $resetpassword_created=$resetpassword_token->resetpassword_created_at;
+
+     $token['resetpassword_token']=$resetpassword_token;
+
+   if (strtotime($resetpassword_created) >= strtotime($current_date))
+    {
+        return view('News/reset',$token);
+     }
+         return redirect('login')->with('success','Link Was Exp Please Go to Forget Password Page');
+}
+    return redirect('login')->with('success','Link Was not vaild Please Go to Forget Password Page!!');
+}
+public function Reset_Forget_password(request $request)
+{
+        $validatedData = $request->validate([
+        'New_password' => 'required|min:8',
+        'New_Confirm_password' => 'required_with:password|same:New_password|min:8',
+            ]);
+
+            $resetpassword_token=request()->token;
+  
+     $New_password=request()->New_password;
+
+    DB::table('User_Details')->where('resetpassword_token','=',$resetpassword_token)->update(['password'=>md5($New_password)]);
+    return redirect('login')->with('success','password was changed successfully');
 }
 }

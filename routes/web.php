@@ -41,14 +41,13 @@ Route::post('Check','studentdetails@store');
 
 Route::get('Session','UserController@showProfile');
 
-Route::get('NewsHome','UserController@View');
-Route::get('admin','UserController@admin');
-Route::get('Register','UserController@Register');
+Route::get('NewsHome','UserController@View');#news home page
+Route::get('admin','UserController@admin');# admin dashboard
+Route::get('Register','UserController@Register');# user register
 Route::post('User_register','UserController@Validation');
-Route::get('login','UserController@Login');
+Route::get('login','UserController@Login');#user login
 Route::post('User_Login','UserController@Logining');
-Route::get('Forget_Password','UserController@Forget_password');
-Route::post('new_password','UserController@New_password');
-
-
-Route::post('send', 'UserController@send');
+Route::get('Forget_Password','UserController@Forget_password'); #forget password
+Route::post('new_password','UserController@New_password'); #new password
+Route::get('Change_password/{resetpassword_token}','UserController@Change_password');#change password in the forget password
+Route::post('Reset_Forget_password','UserController@Reset_Forget_password');#update the reset forget password
