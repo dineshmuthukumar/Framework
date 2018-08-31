@@ -10,6 +10,7 @@
 </div>
 
 @endif
+
 @if($errors->any())
 <h4>{{$errors->first()}}</h4>
 @endif
@@ -23,7 +24,6 @@
 <form action="{{url('User_Login')}}" method="post">
 {{csrf_field()}}
 <center>
-	
 	<legend>Login</legend>
  <table>
 <tr><td>Email_id:   </td><td><input type="text" name="Emailid" placeholder="Enter the Email_id"></td></tr>

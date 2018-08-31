@@ -1,4 +1,8 @@
 
+<?php
+dd($resetpassword_token);
+die();
+?>
 @if ($errors->any())
           <div class="alert alert-danger">
               <ul>

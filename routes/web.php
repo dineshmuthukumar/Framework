@@ -42,7 +42,6 @@ Route::post('Check','studentdetails@store');
 Route::get('Session','UserController@showProfile');
 
 Route::get('NewsHome','UserController@View');#news home page
-Route::get('admin','UserController@admin');# admin dashboard
 Route::get('Register','UserController@Register');# user register
 Route::post('User_register','UserController@Validation');
 Route::get('login','UserController@Login');#user login
@@ -51,3 +50,11 @@ Route::get('Forget_Password','UserController@Forget_password'); #forget password
 Route::post('new_password','UserController@New_password'); #new password
 Route::get('Change_password/{resetpassword_token}','UserController@Change_password');#change password in the forget password
 Route::post('Reset_Forget_password','UserController@Reset_Forget_password');#update the reset forget password
+
+
+Route::get('admin','AdminController@admin'); #admin dashboard
+Route::get('User_Profile','AdminController@profile');
+Route::get('table','AdminController@usertable');
+Route::post('profile_update','AdminController@profile_update');
+Route::get('Reset_password','AdminController@Reset_password');#Reset_password_new
+Route::post('Reset_password_new','AdminController@Reset_password_new');

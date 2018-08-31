@@ -15,7 +15,7 @@
 	
 	<legend>New Password</legend>
  <table>
-<tr><td><input type="hidden" name="token" value="<?php $resetpassword_token->resetpassword_token; ?>"></td></tr>
+<tr><td><input type="hidden" name="token" value="{{$resetpassword_token->resetpassword_token}}"></td></tr>
 <tr><td>New_password</td><td><input type="Password" name="New_password" placeholder="Please enter the new_password"></td></tr>
 <tr><td>Confirm_password</td><td><input type="Password" name="New_Confirm_password" placeholder="Please enter the new_password"></td></tr>
 <tr><td><input type="submit" name="submit" value="submit"></td>

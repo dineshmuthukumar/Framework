@@ -57,16 +57,27 @@ public function Login()
 {
     return view('News/Login');
 }
-public function Logining()
+public function Logining(request $request)
 {
+    $validatedData = $request->validate([
+        'Emailid' => 'required',
+        'password' => 'required',
+            ]);
    $Email_id=request()->Emailid;
     $password=request()->password;
-    $Login=DB::table('User_Details')->select('name','email_id','password')->where('email_id','=',$Email_id)->where("password", "=", md5($password))->first();
-    if(!$Login)
+    $Login=DB::table('User_Details')->select('name','email_id','resetpassword_token')->where('email_id','=',$Email_id)->where("password", "=", md5($password))->first();
+
+    if(!isset($Login))
     {
         return redirect('login')->with('success','Email_id and password incorrect!');
     }
-    return View('News/Admin');
+$name=$Login->name;
+$Emailid=$Login->email_id;
+$token=$Login->resetpassword_token;
+  Session::put('name', $name);
+  Session::put('Emailid', $Emailid);
+  Session::put('token', $token);
+    return redirect('admin');
 
 }
 public function Forget_password()
@@ -74,9 +85,11 @@ public function Forget_password()
     return view('News/forget');
 }
 
-public function New_password()
+public function New_password(request $request)
 {
-    
+    $validatedData = $request->validate([
+        'Forget_Emailid' => 'required'
+            ]);
  $Email_id=request()->Forget_Emailid;
 
 $expire_stamp = date('Y-m-d h:i:s', strtotime("+10 min"));
@@ -97,13 +110,12 @@ $resetpassword_token=DB::table('User_Details')->where('email_id','=',$Email_id)-
             $message->to($Email_id)->subject('Forget Password Notification');                                                       
              
               });
-    return redirect('login');
+    return redirect('login')->with('success','Forget Password Sended Your Mail indox!');
   }
   return redirect('login')->with('success','invaild emailid Please go to the Register page!');
 }
 public function Change_password($resetpassword_token)
 {
-   
     $current_date=date('Y-m-d h:i:s');
     $database_token=DB::table('User_Details')->where('resetpassword_token','=',$resetpassword_token)->select('resetpassword_token')->first();
 
@@ -119,7 +131,7 @@ public function Change_password($resetpassword_token)
     {
         return view('News/reset',$token);
      }
-         return redirect('login')->with('success','Link Was Exp Please Go to Forget Password Page');
+         return redirect('login')->with('success','Link Was Expired Please Go to Forget Password Page');
 }
     return redirect('login')->with('success','Link Was not vaild Please Go to Forget Password Page!!');
 }
@@ -130,7 +142,7 @@ public function Reset_Forget_password(request $request)
         'New_Confirm_password' => 'required_with:password|same:New_password|min:8',
             ]);
 
-            $resetpassword_token=request()->token;
+    $resetpassword_token=request()->token;
   
      $New_password=request()->New_password;
 
