@@ -1,11 +1,3 @@
-
-@foreach ($table as  $stu)
-<tr>
-  <td>{{$stu->id}}</td>
-    <td><a href='{{ url("/mark/$stu->id") }}'>{{$stu->name}}</td>
-  <td>{{$stu->email_id}}</td>
-</tr>
-@endforeach
 <!doctype html>
 
 <html class="no-js h-100" lang="en">
@@ -20,7 +12,7 @@
             <div class="page-header row no-gutters py-4">
               <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
                 <span class="text-uppercase page-subtitle">Overview</span>
-                <h3 class="page-title">Userroles Tables</h3>
+                <h3 class="page-title">User Tables</h3>
               </div>
             </div>
             <!-- End Page Header -->
@@ -35,20 +27,19 @@
                     <table class="table mb-0">
                       <thead class="bg-light">
                         <tr>
-                          <th scope="col" class="border-0">#</th>
-                          <th scope="col" class="border-0">First Name</th>
-                          <th scope="col" class="border-0">Last Name</th>
-                          <th scope="col" class="border-0">Country</th>
-                          <th scope="col" class="border-0">City</th>
-                          <th scope="col" class="border-0">Phone</th>
+                           <th scope="col" class="border-0">User_id</th>
+                          <th scope="col" class="border-0">User_Name</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          
+                       @foreach ($table as  $user)
+                       <td><a class="btn btn-accent" href='{{url("/role/$user->id")}}'> {{$user->id}}</td>
+                      <td>{{$user->name}}</td>
+                     </tr>
+                     @endforeach
                         </tr>
-                       
-                      </tbody>
+                       </tbody>
                     </table>
                   </div>
                 </div>

@@ -58,3 +58,7 @@ Route::get('table','AdminController@usertable');
 Route::post('profile_update','AdminController@profile_update');
 Route::get('Reset_password','AdminController@Reset_password');#Reset_password_new
 Route::post('Reset_password_new','AdminController@Reset_password_new');
+
+Route::get('Role','AdminController@create');
+Route::get('role/{id}','AdminController@table');
+Route::post('User_details','AdminController@New');

@@ -48,7 +48,7 @@ if ($validator->fails()) {
     $Password=request()->Password;
 
 
-    DB::table('User_Details')->insert(
+    DB::table('users')->insert(
     ['name' => $name,'email_id'=>$Email_id,'password'=>md5($Password)]);
  
    return redirect('NewsHome');
@@ -65,7 +65,7 @@ public function Logining(request $request)
             ]);
    $Email_id=request()->Emailid;
     $password=request()->password;
-    $Login=DB::table('User_Details')->select('name','email_id','resetpassword_token')->where('email_id','=',$Email_id)->where("password", "=", md5($password))->first();
+    $Login=DB::table('users')->select('name','email_id','resetpassword_token')->where('email_id','=',$Email_id)->where("password", "=", md5($password))->first();
 
     if(!isset($Login))
     {
@@ -94,10 +94,10 @@ public function New_password(request $request)
 
 $expire_stamp = date('Y-m-d h:i:s', strtotime("+10 min"));
 
-$Email=DB::table('User_Details')->where('email_id','=',$Email_id)->update(['resetpassword_token'=>uniqid(),'resetpassword_created_at'=>$expire_stamp]);
+$Email=DB::table('users')->where('email_id','=',$Email_id)->update(['resetpassword_token'=>uniqid(),'resetpassword_created_at'=>$expire_stamp]);
 if(!empty($Email))
 {
-$resetpassword_token=DB::table('User_Details')->where('email_id','=',$Email_id)->select('resetpassword_token')->first();
+$resetpassword_token=DB::table('users')->where('email_id','=',$Email_id)->select('resetpassword_token')->first();
    
    $data['resetpassword_token']=$resetpassword_token;
     
@@ -117,11 +117,11 @@ $resetpassword_token=DB::table('User_Details')->where('email_id','=',$Email_id)-
 public function Change_password($resetpassword_token)
 {
     $current_date=date('Y-m-d h:i:s');
-    $database_token=DB::table('User_Details')->where('resetpassword_token','=',$resetpassword_token)->select('resetpassword_token')->first();
+    $database_token=DB::table('users')->where('resetpassword_token','=',$resetpassword_token)->select('resetpassword_token')->first();
 
  if(!empty($database_token))
 {
-     $resetpassword_token=DB::table('User_Details')->where('resetpassword_token','=',$resetpassword_token)->select('resetpassword_created_at','resetpassword_token')->first();
+     $resetpassword_token=DB::table('users')->where('resetpassword_token','=',$resetpassword_token)->select('resetpassword_created_at','resetpassword_token')->first();
 
       $resetpassword_created=$resetpassword_token->resetpassword_created_at;
 
@@ -146,7 +146,7 @@ public function Reset_Forget_password(request $request)
   
      $New_password=request()->New_password;
 
-    DB::table('User_Details')->where('resetpassword_token','=',$resetpassword_token)->update(['password'=>md5($New_password)]);
+    DB::table('users')->where('resetpassword_token','=',$resetpassword_token)->update(['password'=>md5($New_password)]);
     return redirect('login')->with('success','password was changed successfully');
 }
 }
